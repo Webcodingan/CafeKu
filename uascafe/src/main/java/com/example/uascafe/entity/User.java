@@ -3,8 +3,8 @@ package com.example.uascafe.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+// import jakarta.persistence.GeneratedValue;
+// import jakarta.persistence.GenerationType;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.Table;
 import jakarta.persistence.InheritanceType;
@@ -16,8 +16,8 @@ import jakarta.persistence.InheritanceType;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String idUser;
+    @Column(name = "idUser")
+    private Long idUser;
 
     @Column(name = "nama")
     private String nama;
@@ -25,7 +25,7 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password") 
     private String password;
 
     @Column(name = "notelp")
@@ -33,11 +33,11 @@ public class User {
 
     // Getters and setters
 
-    public String getIdUser() {
+    public Long getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(String idUser) {
+    public void setIdUser(Long idUser) {
         this.idUser = idUser;
     }
 

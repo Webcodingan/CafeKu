@@ -3,8 +3,10 @@ package com.example.uascafe.entity;
 import jakarta.persistence.Entity;
 // import jakarta.persistence.Id;
 // import jakarta.persistence.Column;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 
 @Entity
+@PrimaryKeyJoinColumn(name = "idUser")
 public class Karyawan extends User{
 
     private String shift;
