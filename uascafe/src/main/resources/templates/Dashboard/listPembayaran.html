@@ -43,9 +43,40 @@
         </div>
     </nav>
     <!-- navbar -->
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID Pembayaran</th>
+                    <th>Metode Payment</th>
+                    <th>Total Harga</th>
+                    <th>Pesanan</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="pembayaran : ${pembayaranList}">
+                    <td th:text="${pembayaran.idPembayaran}"></td>
+                    <td th:text="${pembayaran.metodePayment}"></td>
+                    <td th:text="${pembayaran.totalHarga}"></td>
+                    <td th:text="${pembayaran.pesanan.idOrder}"></td>
+                    <td>
+                        <a th:href="@{/pembayaran/{id}(id=${pembayaran.idPembayaran})}"><button type="button" class="btn btn-info">Detail</button></a>
+
+                        <a th:href="@{/pembayaran/delete/{id}(id=${pembayaran.idPembayaran})}"><button type="button" class="btn btn-danger">Hapus</button></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 </body>
+
 </html>
+
+
+

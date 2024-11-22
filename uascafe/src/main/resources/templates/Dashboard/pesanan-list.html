@@ -31,9 +31,6 @@
                         <a class="nav-link active" aria-current="page" href="/pesanan">Menu Pesanan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/pembayaran">Menu Pembayaran</a>
-                    </li>
-                    <li class="nav-item">
                         <form method="post" action="/karyawan/logout" style="display: inline;">
                             <button class="nav-link btn btn-link" type="submit">Logout</button>
                         </form>
@@ -44,8 +41,35 @@
     </nav>
     <!-- navbar -->
 
+    <div class="container">
+        <!-- list pesanan -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Menu</th>
+                    <th>Tanggal</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="pesanan : ${pesananList}">
+                    <td th:text="${pesanan.idOrder}"></td>
+                    <td th:text="${pesanan.menu != null ? pesanan.menu.namaMenu : 'N/A'}"></td>
+                    <td th:text="${pesanan.tanggal}"></td>
+                    <td>
+                        <a th:href="@{/pesanan/{id}(id=${pesanan.idOrder})}" class="btn btn-info">Detail</a>
+                        <a th:href="@{/pesanan/delete/{id}(id=${pesanan.idOrder})}" class="btn btn-danger">Hapus</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- list pesanan -->
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 </body>
+
 </html>

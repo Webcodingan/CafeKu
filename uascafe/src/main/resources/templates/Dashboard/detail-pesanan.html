@@ -31,9 +31,6 @@
                         <a class="nav-link active" aria-current="page" href="/pesanan">Menu Pesanan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/pembayaran">Menu Pembayaran</a>
-                    </li>
-                    <li class="nav-item">
                         <form method="post" action="/karyawan/logout" style="display: inline;">
                             <button class="nav-link btn btn-link" type="submit">Logout</button>
                         </form>
@@ -44,8 +41,37 @@
     </nav>
     <!-- navbar -->
 
+    <div class="container">
+        <h1>Detail Pesanan</h1>
+        <table>
+            <tr>
+                <th>ID Pesanan:</th>
+                <td th:text="${pesanan.idOrder}"></td>
+            </tr>
+            <tr>
+                <th>Menu:</th>
+                <td th:text="${pesanan.menu != null ? pesanan.menu.namaMenu : 'N/A'}"></td>
+            </tr>
+            <tr>
+                <th>Kuantitas:</th>
+                <td th:text="${pesanan.kuantitas}"></td>
+            </tr>
+            <tr>
+                <th>Note:</th>
+                <td th:text="${pesanan.note}"></td>
+            </tr>
+            <tr>
+                <th>Tanggal:</th>
+                <td th:text="${pesanan.tanggal}"></td>
+            </tr>
+        </table>
+
+        <a href="/pesanan" class="btn btn-secondary mt-3">Kembali ke Daftar Pesanan</a>
+    </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 </body>
+
 </html>
