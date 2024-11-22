@@ -1,19 +1,13 @@
 package com.example.uascafe.entity;
 
 import jakarta.persistence.Entity;
-// import jakarta.persistence.Id;
-// import jakarta.persistence.Column;
-import jakarta.persistence.PrimaryKeyJoinColumn;
 
 @Entity
-@PrimaryKeyJoinColumn(name = "idUser")
-public class Karyawan extends User{
-
+public class Karyawan extends User {
     private String shift;
     private String alamat;
 
-    // Getters and setters
-
+    // Getters and Setters
     public String getShift() {
         return shift;
     }

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+            <a class="navbar-brand" href="/karyawan-dashboard">Karyawan</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/karyawan/list">Data
+                            Karyawan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/menu">Menu Makanan</a>
+                    </li>
+                    <li class="nav-item">
+                        <form method="post" action="/api/karyawan/logout" style="display: inline;">
+                            <button class="nav-link btn btn-link" type="submit">Logout</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- navbar -->
+
+    <div class="container">
+        <h1>Menu Form</h1>
+        <!-- <form th:action="@{/menu/save}" th:object="${menu}" method="post">
+            <input type="hidden" th:field="*{idMenu}">
+        
+            <label>Nama Menu:</label>
+            <input type="text" th:field="*{namaMenu}" required>
+            <br>
+            <label>Tipe:</label>
+            <input type="text" th:field="*{tipe}" required>
+            <br>
+            <label>Harga:</label>
+            <input type="number" th:field="*{harga}" required>
+            <br>
+            <button type="submit">Save</button>
+        </form> -->
+
+        <form th:action="@{/menu/save}" th:object="${menu}" method="post">
+            <input type="hidden" th:field="*{idMenu}">
+
+            <div class="mb-3">
+                <label for="namaMenu" class="form-label">Nama Menu</label>
+                <input type="text" class="form-control" id="namaMenu" th:field="*{namaMenu}" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Tipe</label>
+                <div>
+                    <input type="radio" id="tea" th:field="*{tipe}" value="TEA">
+                    <label for="tea">Tea</label>
+
+                    <input type="radio" id="coffee" th:field="*{tipe}" value="COFFEE">
+                    <label for="coffee">Coffee</label>
+
+                    <input type="radio" id="juice" th:field="*{tipe}" value="JUICE">
+                    <label for="juice">Juice</label>
+
+                    <input type="radio" id="milk" th:field="*{tipe}" value="MILK">
+                    <label for="milk">Milk</label>
+
+                    <input type="radio" id="dessert" th:field="*{tipe}" value="DESSERT">
+                    <label for="dessert">Dessert</label>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Kategori</label>
+                <div>
+                    <input type="radio" id="sweet" th:field="*{kategori}" value="SWEET">
+                    <label for="sweet">Sweet</label>
+
+                    <input type="radio" id="fresh" th:field="*{kategori}" value="FRESH">
+                    <label for="fresh">Fresh</label>
+
+                    <input type="radio" id="bold" th:field="*{kategori}" value="BOLD">
+                    <label for="bold">Bold</label>
+
+                    <input type="radio" id="light" th:field="*{kategori}" value="LIGHT">
+                    <label for="light">Light</label>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="harga" class="form-label">Harga</label>
+                <input type="text" class="form-control" id="harga" th:field="*{harga}" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+
+        <a href="/menu" style="color:black; text-decoration: none;">Back to Menu List</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

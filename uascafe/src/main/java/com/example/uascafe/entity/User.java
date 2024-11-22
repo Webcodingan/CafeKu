@@ -1,44 +1,24 @@
 package com.example.uascafe.entity;
 
-import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Id;
-import jakarta.persistence.Entity;
-// import jakarta.persistence.GeneratedValue;
-// import jakarta.persistence.GenerationType;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.Table;
-import jakarta.persistence.InheritanceType;
 
-@Entity
-@Table(name = "user")
-
-@Inheritance(strategy = InheritanceType.JOINED)
-public class User {
-
+@MappedSuperclass
+public abstract class User {
     @Id
-    @Column(name = "idUser")
-    private Long idUser;
-
-    @Column(name = "nama")
+    private String id;
     private String nama;
-
-    @Column(name = "email")
     private String email;
-
-    @Column(name = "password") 
     private String password;
-
-    @Column(name = "notelp")
     private String notelp;
 
-    // Getters and setters
-
-    public Long getIdUser() {
-        return idUser;
+    // Getters and Setters
+    public String getId() {
+        return id;
     }
 
-    public void setIdUser(Long idUser) {
-        this.idUser = idUser;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNama() {
@@ -65,11 +45,11 @@ public class User {
         this.password = password;
     }
 
-    public String getNotelp() {
+    public String getnotelp() {
         return notelp;
     }
 
-    public void setNotelp(String notelp) {
+    public void setnotelp(String notelp) {
         this.notelp = notelp;
     }
 }
