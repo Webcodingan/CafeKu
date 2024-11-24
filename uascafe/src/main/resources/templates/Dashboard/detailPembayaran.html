@@ -14,9 +14,8 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container">
             <a class="navbar-brand" href="/karyawan-dashboard">Karyawan</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -44,50 +43,11 @@
     </nav>
     <!-- navbar -->
 
-    <!-- detail pembayaran -->
-
-    <div class="container mt-5">
-        <h2 class="mb-4">Detail Pembayaran</h2>
-    
-        <table class="table table-bordered">
-            <tbody>
-                <tr>
-                    <th>ID Pembayaran</th>
-                    <td th:text="${pembayaran.idPembayaran}"></td>
-                </tr>
-                <tr>
-                    <th>Menu</th>
-                    <td th:text="${pembayaran.pesanan.menu.namaMenu}"></td>
-                </tr>
-                <tr>
-                    <th>Metode Pembayaran</th>
-                    <td th:text="${pembayaran.metodePayment}"></td>
-                </tr>
-                <tr>
-                    <th>Kuantitas</th>
-                    <td th:text="${pembayaran.pesanan.kuantitas}"></td>
-                </tr>
-                <tr>
-                    <th>Total Harga</th>
-                    <td th:text="${pembayaran.totalHarga}"></td>
-                </tr>
-                <tr>
-                    <th>Tanggal Pesanan</th>
-                    <td th:text="${pembayaran.pesanan.tanggal}"></td>
-                </tr>
-                <tr>
-                    <th>Catatan Pesanan</th>
-                    <td th:text="${pembayaran.pesanan.note}"></td>
-                </tr>
-            </tbody>
-        </table>
-    
-        <div class="mt-4">
-            <a href="/pembayaran" class="btn btn-primary">Kembali ke Daftar Pembayaran</a>
-        </div>
-    </div>
-
-    <!-- detail pembayaran -->
+    <h1>Detail Pembayaran</h1>
+    <p><strong>ID:</strong> <span th:text="${pembayaran.idPembayaran}"></span></p>
+    <p><strong>Metode Pembayaran:</strong> <span th:text="${pembayaran.metodePembayaran}"></span></p>
+    <p><strong>Pajak:</strong> <span th:text="${pembayaran.pajak}"></span></p>
+    <a href="/pembayaran">Kembali ke Daftar Pembayaran</a>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Create Pesanan</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Buat Pesanan Baru</h2>
+        <form th:action="@{/pesanan/save}" th:object="${pesanan}" method="post">
+            <!-- Dropdown untuk memilih menu -->
+            <div class="mb-3">
+                <label for="menuId" class="form-label">Pilih Menu</label>
+                <select id="menuId" name="menuId" class="form-select" required>
+                    <option value="" disabled selected>Pilih menu</option>
+                    <option th:each="menu : ${menuList}" th:value="${menu.idMenu}"
+                        th:text="'[' + ${menu.idMenu} + '] ' + ${menu.namaMenu}"></option>
+                </select>
+            </div>
+
+            <!-- Dropdown untuk memilih metode pembayaran -->
+            <div class="mb-3">
+                <label for="pembayaranId" class="form-label">Metode Pembayaran</label>
+                <select id="pembayaranId" name="pembayaranId" class="form-select" required>
+                    <option value="" disabled selected>Pilih metode pembayaran</option>
+                    <option th:each="pembayaran : ${pembayaranList}" th:value="${pembayaran.idPembayaran}"
+                        th:text="${pembayaran.metodePembayaran}"></option>
+                </select>
+            </div>
+
+            <!-- Input untuk kuantitas -->
+            <div class="mb-3">
+                <label for="kuantitas" class="form-label">Kuantitas</label>
+                <input type="number" id="kuantitas" name="kuantitas" class="form-control" min="1"
+                    th:value="${pesanan.kuantitas}" required>
+            </div>
+
+            <!-- Input untuk catatan (note) -->
+            <div class="mb-3">
+                <label for="note" class="form-label">Catatan</label>
+                <textarea id="note" name="note" class="form-control" th:text="${pesanan.note}"
+                    placeholder="Masukkan catatan (opsional)"></textarea>
+            </div>
+
+            <!-- Tombol submit -->
+            <button type="submit" class="btn btn-primary">Simpan Pesanan</button>
+            <a href="/pesanan" class="btn btn-secondary">Kembali</a>
+
+            <!-- Menampilkan pesan error jika ada -->
+            <div th:if="${errorMessage}" class="alert alert-danger mt-3" th:text="${errorMessage}"></div>
+        </form>
+    </div>
+    <!-- <script>
+        // Set tanggal sekarang secara otomatis
+        document.getElementById('tanggal').value = new Date().toLocaleString('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).replace(',', '');
+    </script> -->
+</body>
+
+</html>

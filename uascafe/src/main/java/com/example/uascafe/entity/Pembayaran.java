@@ -1,26 +1,22 @@
 package com.example.uascafe.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Column;
 
 @Entity
-
-@Table(name = "pembayaran")
 public class Pembayaran {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_pembayaran")
     private int idPembayaran;
 
-    @Column(name = "metode_payment", nullable = false)
-    private String metodePayment;
+    @Column(nullable = false, length = 100)
+    private String metodePembayaran;
 
-    @Column(name = "total_harga", nullable = false)
-    private int totalHarga;
-
-    @OneToOne
-    @JoinColumn(name = "id_order", nullable = false)
-    private Pesanan pesanan;
+    private Double pajak = 0.11;
 
     // Getters and Setters
     public int getIdPembayaran() {
@@ -31,27 +27,19 @@ public class Pembayaran {
         this.idPembayaran = idPembayaran;
     }
 
-    public String getMetodePayment() {
-        return metodePayment;
+    public String getMetodePembayaran() {
+        return metodePembayaran;
     }
 
-    public void setMetodePayment(String metodePayment) {
-        this.metodePayment = metodePayment;
+    public void setMetodePembayaran(String metodePembayaran) {
+        this.metodePembayaran = metodePembayaran;
     }
 
-    public int getTotalHarga() {
-        return totalHarga;
+    public double getPajak() {
+        return pajak;
     }
 
-    public void setTotalHarga(int totalHarga) {
-        this.totalHarga = totalHarga;
-    }
-
-    public Pesanan getPesanan() {
-        return pesanan;
-    }
-
-    public void setPesanan(Pesanan pesanan) {
-        this.pesanan = pesanan;
+    public void setPajak(double pajak) {
+        this.pajak = pajak;
     }
 }

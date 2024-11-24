@@ -1,7 +1,5 @@
 package com.example.uascafe.entity;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -27,6 +25,10 @@ public class Pesanan {
     @JoinColumn(name = "id_menu", nullable = false)
     private Menu menu;
 
+    @ManyToOne
+    @JoinColumn(name = "id_pembayaran", nullable = false)
+    private Pembayaran pembayaran;
+
     // Getters and Setters
     public int getIdOrder() {
         return idOrder;
@@ -34,6 +36,22 @@ public class Pesanan {
 
     public void setIdOrder(int idOrder) {
         this.idOrder = idOrder;
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+
+    public Pembayaran getPembayaran() {
+        return pembayaran;
+    }
+
+    public void setPembayaran(Pembayaran pembayaran) {
+        this.pembayaran = pembayaran;
     }
 
     public int getKuantitas() {
@@ -58,13 +76,5 @@ public class Pesanan {
 
     public void setTanggal(LocalDateTime tanggal) {
         this.tanggal = tanggal;
-    }
-
-    public Menu getMenu() {
-        return menu;
-    }
-
-    public void setMenu(Menu menu) {
-        this.menu = menu;
     }
 }

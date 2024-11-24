@@ -10,19 +10,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RequestMapping("/menu") // Menambahkan base path
 public class MenuController {
 
     @Autowired
     private MenuService menuService;
 
-    @GetMapping("/menu")
+    @GetMapping
     public String getAllMenus(Model model) {
-        List<Menu> menuList = menuService.getAllMenus();
+        List<Menu> menuList = menuService.getAllMenu();
         model.addAttribute("menuList", menuList);
         return "Dashboard/menu-list";
     }
 
-    @GetMapping("/menu/add")
+    @GetMapping("/add")
     public String showAddMenuForm(Model model) {
         model.addAttribute("menu", new Menu());
         model.addAttribute("tipeOptions", Menu.Tipe.values());
@@ -30,30 +31,34 @@ public class MenuController {
         return "Dashboard/menu-form";
     }
 
-    @PostMapping("/menu/save")
-    public String saveMenu(@ModelAttribute("menu") Menu menu) {
+    @PostMapping("/save")
+    public String saveMenu(@ModelAttribute("menu") Menu menu, Model model) {
         try {
             Menu.Tipe.valueOf(menu.getTipe().name());
             Menu.Kategori.valueOf(menu.getKategori().name());
 
             menuService.createOrUpdateMenu(menu);
         } catch (IllegalArgumentException e) {
-            return "redirect:/menu/add?error=invalid_enum";
+            model.addAttribute("errorMessage", "Invalid enum value for Tipe or Kategori");
+            model.addAttribute("tipeOptions", Menu.Tipe.values());
+            model.addAttribute("kategoriOptions", Menu.Kategori.values());
+            return "Dashboard/menu-form";
         }
 
         return "redirect:/menu";
     }
 
-    @GetMapping("/menu/edit/{idMenu}")
+    @GetMapping("/edit/{idMenu}")
     public String showEditMenuForm(@PathVariable("idMenu") int idMenu, Model model) {
-        Menu menu = menuService.getMenuById(idMenu);
+        Menu menu = menuService.getMenuById(idMenu)
+                .orElseThrow(() -> new IllegalArgumentException("Menu not found for ID: " + idMenu));
         model.addAttribute("menu", menu);
         model.addAttribute("tipeOptions", Menu.Tipe.values());
         model.addAttribute("kategoriOptions", Menu.Kategori.values());
         return "Dashboard/menu-form";
     }
 
-    @GetMapping("/menu/delete/{idMenu}")
+    @GetMapping("/delete/{idMenu}")
     public String deleteMenu(@PathVariable("idMenu") int idMenu) {
         menuService.deleteMenu(idMenu);
         return "redirect:/menu";

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Pelanggan</title>
+</head>
+
+<body>
+    <h2>Register Pelanggan</h2>
+    <form action="/pelanggan/register" method="POST">
+        <label for="nama">Nama:</label><br>
+        <input type="text" id="nama" name="nama" required><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="notelp">No. Telp:</label><br>
+        <input type="text" id="notelp" name="notelp" required><br><br>
+
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <label for="confirmPassword">Confirm Password:</label><br>
+        <input type="password" id="confirmPassword" name="confirmPassword" required><br><br>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <!-- Error or Success Messages -->
+    <div th:if="${error}">
+        <p th:text="${error}" style="color: red;"></p>
+    </div>
+    <div th:if="${success}">
+        <p th:text="${success}" style="color: green;"></p>
+    </div>
+</body>
+
+</html>

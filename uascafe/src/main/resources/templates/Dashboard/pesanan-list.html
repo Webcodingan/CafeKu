@@ -14,9 +14,8 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container">
             <a class="navbar-brand" href="/karyawan-dashboard">Karyawan</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -31,6 +30,9 @@
                         <a class="nav-link active" aria-current="page" href="/pesanan">Menu Pesanan</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/pembayaran">Menu Pembayaran</a>
+                    </li>
+                    <li class="nav-item">
                         <form method="post" action="/karyawan/logout" style="display: inline;">
                             <button class="nav-link btn btn-link" type="submit">Logout</button>
                         </form>
@@ -43,12 +45,16 @@
 
     <div class="container">
         <!-- list pesanan -->
+        <a href="/pesanan/create">Create pesanan</a>
+
         <table class="table">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Menu</th>
-                    <th>Tanggal</th>
+                    <th>Nama Menu</th>
+                    <th>Harga</th>
+                    <th>Pajak</th>
+                    <th>Metode Pembayaran</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -56,7 +62,9 @@
                 <tr th:each="pesanan : ${pesananList}">
                     <td th:text="${pesanan.idOrder}"></td>
                     <td th:text="${pesanan.menu != null ? pesanan.menu.namaMenu : 'N/A'}"></td>
-                    <td th:text="${pesanan.tanggal}"></td>
+                    <td th:text="${pesanan.menu != null ? pesanan.menu.harga : 'N/A'}"></td>
+                    <td th:text="${pesanan.pembayaran != null ? pesanan.pembayaran.pajak : 'N/A'}"></td>
+                    <td th:text="${pesanan.pembayaran != null ? pesanan.pembayaran.metodePembayaran : 'N/A'}"></td>
                     <td>
                         <a th:href="@{/pesanan/{id}(id=${pesanan.idOrder})}" class="btn btn-info">Detail</a>
                         <a th:href="@{/pesanan/delete/{id}(id=${pesanan.idOrder})}" class="btn btn-danger">Hapus</a>

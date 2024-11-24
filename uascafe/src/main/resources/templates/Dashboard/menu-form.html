@@ -15,22 +15,26 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container">
             <a class="navbar-brand" href="/karyawan-dashboard">Karyawan</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/karyawan/list">Data
-                            Karyawan</a>
+                        <a class="nav-link active" aria-current="page" href="/karyawan/list">Data Karyawan</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/menu">Menu Makanan</a>
                     </li>
                     <li class="nav-item">
-                        <form method="post" action="/api/karyawan/logout" style="display: inline;">
+                        <a class="nav-link active" aria-current="page" href="/pesanan">Menu Pesanan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/pembayaran">Menu Pembayaran</a>
+                    </li>
+                    <li class="nav-item">
+                        <form method="post" action="/karyawan/logout" style="display: inline;">
                             <button class="nav-link btn btn-link" type="submit">Logout</button>
                         </form>
                     </li>

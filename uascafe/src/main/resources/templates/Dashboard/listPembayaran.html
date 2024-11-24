@@ -14,9 +14,8 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container">
             <a class="navbar-brand" href="/karyawan-dashboard">Karyawan</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -44,39 +43,36 @@
     </nav>
     <!-- navbar -->
     <div class="container">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>ID Pembayaran</th>
-                    <th>Metode Payment</th>
-                    <th>Total Harga</th>
-                    <th>Pesanan</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="pembayaran : ${pembayaranList}">
-                    <td th:text="${pembayaran.idPembayaran}"></td>
-                    <td th:text="${pembayaran.metodePayment}"></td>
-                    <td th:text="${pembayaran.totalHarga}"></td>
-                    <td th:text="${pembayaran.pesanan.idOrder}"></td>
-                    <td>
-                        <a th:href="@{/pembayaran/{id}(id=${pembayaran.idPembayaran})}"><button type="button" class="btn btn-info">Detail</button></a>
 
-                        <a th:href="@{/pembayaran/delete/{id}(id=${pembayaran.idPembayaran})}"><button type="button" class="btn btn-danger">Hapus</button></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        
+    <h1>Daftar Pembayaran</h1>
+    <a href="/pembayaran/create">Buat Pembayaran Baru</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Metode Pembayaran</th>
+                <th>Pajak</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="pembayaran : ${listPembayaran}">
+                <td th:text="${pembayaran.idPembayaran}"></td>
+                <td th:text="${pembayaran.metodePembayaran}"></td>
+                <td th:text="${pembayaran.pajak}"></td>
+                <td>
+                    <a th:href="@{'/pembayaran/' + ${pembayaran.idPembayaran}}">Detail</a>
+                    <a th:href="@{'/pembayaran/delete/' + ${pembayaran.idPembayaran}}"
+                        onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 </body>
 
 </html>
-
-
-
