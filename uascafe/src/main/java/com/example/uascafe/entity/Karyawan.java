@@ -23,4 +23,9 @@ public class Karyawan extends User {
     public void setAlamat(String alamat) {
         this.alamat = alamat;
     }
+
+    @Override
+    public String notifikasiLogin() {
+        return "Karyawan " + getNama() + " telah berhasil login.";
+    }
 }

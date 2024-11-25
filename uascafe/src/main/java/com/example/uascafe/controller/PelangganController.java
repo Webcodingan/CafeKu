@@ -46,6 +46,10 @@ public class PelangganController {
             session.setAttribute("pelangganId", pelanggan.getId());
             session.setAttribute("pelangganNama", pelanggan.getNama());
             session.setAttribute("loggedInUserEmail", pelanggan.getEmail()); // Menyimpan email ke session
+
+            String notifikasi = pelanggan.notifikasiLogin();
+            model.addAttribute("notifikasi", notifikasi);
+
             return "redirect:/Da'cof"; // Redirect ke halaman dashboard
         }
 
@@ -96,11 +100,21 @@ public class PelangganController {
             return "register-pelanggan.html";
         }
 
+        // Validasi apakah email sudah digunakan
+        if (pelangganService.findByEmail(email) != null) {
+            model.addAttribute("error", "Email sudah digunakan!");
+            return "register-pelanggan.html";
+        }
+
         // Hash password menggunakan MD5
         String hashedPassword = pelangganService.hashPassword(password);
 
-        // Membuat objek pelanggan dan menyimpannya
+        // Generate ID baru untuk pelanggan
+        String newId = pelangganService.generateId();
+
+        // Membuat objek pelanggan
         Pelanggan pelanggan = new Pelanggan();
+        pelanggan.setId(newId); // Set ID baru
         pelanggan.setNama(nama);
         pelanggan.setEmail(email);
         pelanggan.setnotelp(notelp);
@@ -112,4 +126,5 @@ public class PelangganController {
         model.addAttribute("success", "Registrasi berhasil! Silakan login.");
         return "login-pelanggan.html"; // Mengarah ke halaman login setelah registrasi berhasil
     }
+
 }

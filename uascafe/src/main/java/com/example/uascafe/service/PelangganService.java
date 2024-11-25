@@ -17,6 +17,17 @@ public class PelangganService {
     @Autowired
     private PelangganRepository pelangganRepository;
 
+    public String generateId() {
+        String lastId = pelangganRepository.findMaxId();
+
+        if (lastId == null) {
+            return "Pel01"; // Jika tidak ada data, mulai dari Pel01
+        }
+
+        int nextId = Integer.parseInt(lastId.substring(3)) + 1;
+        return String.format("Pel%02d", nextId); // Format menjadi Pel01, Pel02, dst.
+    }
+
     // Method to hash password using MD5
     public String hashPassword(String password) {
         try {
@@ -51,6 +62,10 @@ public class PelangganService {
 
     // Method to save Pelanggan
     public void savePelanggan(Pelanggan pelanggan) {
+        if (pelangganRepository.existsById(pelanggan.getId())) {
+            throw new RuntimeException("ID pelanggan sudah ada!");
+        }
         pelangganRepository.save(pelanggan);
     }
+
 }

@@ -47,6 +47,11 @@ public class KaryawanController {
             // Simpan data login ke session
             session.setAttribute("karyawanId", karyawan.getId());
             session.setAttribute("karyawanNama", karyawan.getNama());
+
+            // Ambil notifikasi login dan tambahkan ke Model
+            String notifikasi = karyawan.notifikasiLogin();
+            model.addAttribute("notifikasi", notifikasi);
+
             return "redirect:/karyawan-dashboard"; // Redirect ke halaman dashboard
         }
         model.addAttribute("error", "Email atau password salah!");

@@ -52,4 +52,7 @@ public abstract class User {
     public void setnotelp(String notelp) {
         this.notelp = notelp;
     }
+
+    // Abstract method
+    public abstract String notifikasiLogin();
 }
