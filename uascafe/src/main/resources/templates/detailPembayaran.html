@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detail Pembayaran</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Detail Pembayaran</h1>
+
+        <div class="detail-section">
+            <p><strong>Nama Customer:</strong> <span th:text="${customerName}"></span></p>
+            <p><strong>Menu yang Dipesan:</strong> <span th:text="${menuName}"></span></p>
+            <p><strong>Catatan:</strong> <span th:text="${note}"></span></p>
+            <p><strong>Kuantitas:</strong> <span th:text="${quantity}"></span></p>
+            <p><strong>Total Harga:</strong> Rp. <span th:text="${price}"></span></p>
+            <p><strong>Rating:</strong><span th:text="${rating}"></span></p>
+        </div>
+
+        <div class="actions">
+            <a href="/allmenu" class="btn">Kembali ke Menu</a>
+        </div>
+    </div>
+</body>
+</html>

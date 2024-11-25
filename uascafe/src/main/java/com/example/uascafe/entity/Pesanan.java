@@ -29,29 +29,17 @@ public class Pesanan {
     @JoinColumn(name = "id_pembayaran", nullable = false)
     private Pembayaran pembayaran;
 
-    // Getters and Setters
+    @ManyToOne
+    @JoinColumn(name = "id", nullable = false)
+    private Pelanggan pelanggan;
+
+    // Getter dan Setter
     public int getIdOrder() {
         return idOrder;
     }
 
     public void setIdOrder(int idOrder) {
         this.idOrder = idOrder;
-    }
-
-    public Menu getMenu() {
-        return menu;
-    }
-
-    public void setMenu(Menu menu) {
-        this.menu = menu;
-    }
-
-    public Pembayaran getPembayaran() {
-        return pembayaran;
-    }
-
-    public void setPembayaran(Pembayaran pembayaran) {
-        this.pembayaran = pembayaran;
     }
 
     public int getKuantitas() {
@@ -76,5 +64,29 @@ public class Pesanan {
 
     public void setTanggal(LocalDateTime tanggal) {
         this.tanggal = tanggal;
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+
+    public Pembayaran getPembayaran() {
+        return pembayaran;
+    }
+
+    public void setPembayaran(Pembayaran pembayaran) {
+        this.pembayaran = pembayaran;
+    }
+
+    public Pelanggan getPelanggan() {
+        return pelanggan;
+    }
+
+    public void setPelanggan(Pelanggan pelanggan) {
+        this.pelanggan = pelanggan;
     }
 }

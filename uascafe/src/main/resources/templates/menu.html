@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Menu</title>
+    <!-- Favicons -->
+    <link th:href="@{/img/icon.png}" rel="icon">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Google Font -->
+    <link th:href="@{https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900}" rel="stylesheet" />
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+        th:href="@{https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/menu.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+
+    <!-- Font Awesome -->
+    <script th:src="@{https://kit.fontawesome.com/b5404b0a68.js}" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- Include the sidebar fragment -->
+    <div th:replace="sidebar :: sidebar"></div>
+
+    <!-- Page Content  -->
+    <div id="content" class="p-4 p-md-5 pt-5">
+        <div class="AllMenu">
+            <div class="container">
+                <div class="header">
+                    <h1 class="title">All Menu</h1>
+                </div>
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane fade show p-0 active">
+                        <div class="row g-4">
+                            <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s"
+                                th:each="menu : ${menuList}">
+                                <div class="menu-item">
+                                    <div class="position-relative bg-light overflow-hidden">
+                                        <img class="img-fluid w-100" th:src="@{/img/img2.jpg}" alt="Menu image">
+                                        <div
+                                            class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
+                                            New</div>
+                                    </div>
+                                    <div class="text-center p-4">
+                                        <a class="d-block h5 mb-2" th:href="@{'/menu/detail/' + ${menu.idMenu}}"
+                                            th:text="${menu.namaMenu}"></a>
+                                        <span class="text-primary me-1" th:text="${menu.tipe}"></span>
+                                        <span class="text-primary me-1" th:text="${menu.kategori}"></span>
+                                        <span class="text-body text-decoration-line-through"
+                                            th:text="${menu.harga}"></span>
+                                    </div>
+                                    <div class="d-flex border-top">
+                                        <small class="w-50 text-center border-end py-2">
+                                            <a class="text-body" th:href="@{'/menu/detail/' + ${menu.idMenu}}"><i
+                                                    class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                        </small>
+                                        <small class="w-50 text-center py-2">
+                                            <a class="text-body" th:href="@{pesanan/create}"><i
+                                                    class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+            © 2024 Copyright:
+            <a class="text-white" href="">Kelompok 1 - Sistem Informasi A '23</a>
+        </div>
+    </footer>
+
+    <script th:src="@{js/jquery.min.js}"></script>
+    <script th:src="@{js/popper.js}"></script>
+    <script th:src="@{js/bootstrap.min.js}"></script>
+    <script th:src="@{js/main.js}"></script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<div th:fragment="sidebar">
+  <div class="wrapper d-flex align-items-stretch">
+    <nav id="sidebar">
+      <div class="custom-menu">
+        <button type="button" id="sidebarCollapse" class="btn btn-primary">
+          <i class="fa fa-bars"></i>
+          <span class="sr-only">Toggle Menu</span>
+        </button>
+      </div>
+
+      <div class="p-4 pt-5">
+        <h1>
+          <!-- If user is logged in, link to /Da'cof -->
+          <a th:if="${nama != null}" th:href="@{/Da'cof}" class="logo">
+            <i class="fa-solid fa-mug-hot" style="color: #3C2F2F;"></i>DaCof
+          </a>
+
+          <!-- If user is not logged in, link to / -->
+          <a th:if="${nama == null}" th:href="@{/}" class="logo">
+            <i class="fa-solid fa-mug-hot" style="color: #3C2F2F;"></i>DaCof
+          </a>
+        </h1>
+
+        <ul class="list-unstyled components mb-5">
+          <li class="active">
+            <a th:href="@{/allmenu}"><i class="fa-solid fa-table-cells-large"></i>All Menu</a>
+          </li>
+
+          <li>
+            <a th:href="@{/menu/dessert}"><i class="fa-solid fa-ice-cream"></i>Dessert</a>
+          </li>
+
+          <li>
+            <a th:href="@{/menu/drink}"><i class="fa-solid fa-ice-cream"></i>Drink</a>
+          </li>
+        </ul>
+      </div>
+    </nav>

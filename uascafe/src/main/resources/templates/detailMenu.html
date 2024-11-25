@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detail Menu</title>
+</head>
+<body>
+    <h1 th:text="'Detail Menu: ' + ${menu.namaMenu}"></h1>
+    <p><strong>Tipe:</strong> <span th:text="${menu.tipe}"></span></p>
+    <p><strong>Kategori:</strong> <span th:text="${menu.kategori}"></span></p>
+    <p><strong>Harga:</strong> Rp<span th:text="${menu.harga}"></span></p>
+    <a th:href="@{/allmenu}">Kembali ke Menu</a>
+</body>
+</html>

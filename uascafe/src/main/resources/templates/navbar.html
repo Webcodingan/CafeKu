@@ -1,0 +1,52 @@
+<!-- navbar -->
+<div th:fragment="navbar">
+    <nav class="navbar sticky-top navbar-expand-lg" style="background-color: #be9b7b">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fa-solid fa-mug-hot fa-2x" style="color: #3c2f2f"></i>
+                <b>DaCof</b>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active me-5" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link me-5" th:href="@{/allmenu}">Menu</a>
+                    </li>
+
+                    <!-- If the user is logged in, display their name and a logout button -->
+                    <li class="nav-item" th:if="${nama != null}">
+                        <span class="nav-link me-5">Hello, <span th:text="${nama}"></span></span>
+                    </li>
+
+                    <!-- If the user is not logged in, show login button -->
+                    <li class="nav-item" th:if="${nama == null}">
+                        <a class="nav-link me-5" href="/pelanggan/login">Login</a>
+                    </li>
+
+                    <!-- Logout button -->
+                    <li class="nav-item" th:if="${nama != null}">
+                        <form th:action="@{/pelanggan/logout}" method="post" style="display:inline;">
+                            <button type="submit" class="nav-link btn btn-link me-5">Logout</button>
+                        </form>
+                    </li>
+
+                    <li class="nav-item position-relative ms-3">
+                        <i class="fa-solid fa-bell fa-2x"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            99+
+                            <span class="visually-hidden">unread messages</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<!-- navbar -->

@@ -22,8 +22,12 @@ public class PesananService {
     }
 
     // Ambil detail pesanan berdasarkan ID
-    public Optional<Pesanan> getPesananById(int id) {
-        return pesananRepository.findById(id);
+    // public Optional<Pesanan> getPesananById(int id) {
+    //     return pesananRepository.findById(id);
+    // }
+
+    public Optional<Pesanan> getPesananById(int idPesanan) {
+        return pesananRepository.findById(idPesanan);
     }
 
     // Simpan pesanan baru

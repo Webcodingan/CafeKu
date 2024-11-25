@@ -1,0 +1,332 @@
+/* Global Styling */
+h2{
+    color: #3C2F2F;
+    text-align: center;
+}
+
+:root {
+  --primary: #6c3400;
+  --secondary: #545454;
+  --light: #FDF5EB;
+  --dark: #cacaca;
+}
+
+a{
+  color: white;
+  text-decoration: none;
+}
+
+/* ==================================== */
+
+/* Navbar styling */
+.navbar {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand b {
+    color: #3C2F2F;
+    font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+    color: #6F4436;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #3C2F2F;
+}
+
+.fa-bell {
+    transition: transform 0.3s ease;
+}
+
+.fa-bell:hover {
+    transform: scale(1.1);
+    color: #FF6347;
+}
+/* ==================================== */
+
+/* Carousel-top*/
+.carousel-top{
+    margin-bottom: 20px;
+  }
+  
+  .carousel-top img{
+    filter: brightness(60%);
+    width: 100%;
+    height: 600px;
+  }
+  
+  .carousel-top h5{
+    color: #f58549;
+  }
+  
+  .btn-read{
+    background-color: #f2a65a; 
+    width: 120px; 
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+  }
+  
+  .btn-read:hover{
+    background-color: #f58549; 
+    width: 130px;
+    height: 60px;
+    border-radius: 10px;
+    transition: .3s;
+    border: none;
+  }
+  
+  .btn-join{
+    background-color: aliceblue; 
+    width: 120px; 
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+  }
+  
+  .btn-join:hover{
+    background-color: #d2d2d2; 
+    width: 130px;
+    height: 60px;
+    border-radius: 10px;
+    transition: .3s;
+    border: none;
+  }
+  
+  .carousel-inner .carousel-caption{
+    text-align: left; 
+    margin-bottom: 100px; 
+    margin-top: 100px;
+  }
+  
+  .buttonSlide{
+    position: absolute; 
+    top: 50%; 
+    right: 60px; 
+    transform: translateY(-50%); 
+    box-sizing: border-box;
+  }
+  
+  .prev-btn{
+    border-radius: 5px;
+    border: 1px solid gray;
+  }
+  
+  .prev-btn:hover{ 
+    background-color: #f2a65a;
+  }
+  
+  .next-btn{
+    border-radius: 5px;
+    border: 1px solid gray;
+    margin-top: 10px;
+    padding-bottom: 2px;
+  }
+  
+  .next-btn:hover{ 
+    background-color: #f2a65a;
+  }
+/* ==================================== */
+
+/*** About ***/
+.about-img img {
+  position: relative;
+  z-index: 2;
+}
+
+.about-img::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: -50%;
+  width: 100%;
+  height: 100%;
+  background-image: -webkit-repeating-radial-gradient(#FFFFFF, #EEEEEE 5px, transparent 5px, transparent 10px);
+  background-image: -moz-repeating-radial-gradient(#FFFFFF, #EEEEEE 5px, transparent 5px, transparent 10px);
+  background-image: -ms-repeating-radial-gradient(#FFFFFF, #EEEEEE 5px, transparent 5px, transparent 10px);
+  background-image: -o-repeating-radial-gradient(#FFFFFF, #EEEEEE 5px, transparent 5px, transparent 10px);
+  background-image: repeating-radial-gradient(#FFFFFF, #EEEEEE 5px, transparent 5px, transparent 10px);
+  background-size: 20px 20px;
+  transform: skew(20deg);
+  z-index: 1;
+}
+
+/*** Section Header ***/
+.header{
+  margin-top: 8px;
+}
+.header-line {
+  width: 7%;
+  height: 3px;
+  background-color: green;
+  margin-bottom: 10px;
+  margin: 0 auto 10px;
+}
+
+.header-line-short {
+  width: 15%;
+  height: 2px;
+  background-color: orange;
+  margin-bottom: 20px;
+  margin: 0 auto 10px;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.description {
+  font-size: 18px;
+  color: #666;
+}
+/* ==================================== */
+
+/*** Product ***/
+.products .container{
+  background-color: #ffcd73;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.product-item {
+  transition: .5s;
+}
+
+.product-item:hover {
+  background: var(--primary) !important;
+}
+
+.product-item:hover * {
+  color: var(--light);
+}
+
+.product-item:hover .border-primary {
+  border-color: var(--light) !important;
+}
+
+.product-item .product-overlay {
+  position: absolute;
+  width: 100%;
+  height: 0;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, .5);
+  overflow: hidden;
+  opacity: 0;
+  transition: .5s;
+}
+
+.product-item:hover .product-overlay {
+  height: 100%;
+  opacity: 1;
+}
+/* ==================================== */
+
+/* Menu */
+.nav-pills .nav-item .btn {
+  color: var(--dark);
+}
+
+.nav-pills .nav-item .btn:hover,
+.nav-pills .nav-item .btn.active {
+  color: #FFFFFF;
+}
+
+.menu-item {
+  box-shadow: 0 0 45px rgba(0, 0, 0, .07);
+}
+
+.menu-item img {
+  transition: .5s;
+}
+
+.menu-item:hover img {
+  transform: scale(1.1);
+}
+
+.menu-item small a:hover {
+  color: white !important;
+}
+/* ==================================== */
+
+/* Our-Team Styling */
+.our-team .member {
+    text-align: center;
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    overflow: hidden;
+    box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.1);
+    margin-top: 15px;
+  }
+  
+  .our-team .member img {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .our-team .member .member-content {
+    padding: 0 20px 30px 20px;
+  }
+  
+  .our-team .member h4 {
+    font-weight: 700;
+    margin-top: 16px;
+    margin-bottom: 2px;
+    font-size: 20px;
+  }
+  
+  .our-team .member span {
+    font-style: italic;
+    display: block;
+    font-size: 14px;
+    color: #6c757d;
+  }
+  
+  .our-team .member p {
+    padding-top: 10px;
+    font-size: 14px;
+    font-style: italic;
+    color: #6c757d;
+  }
+  
+  .our-team .member .social {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  
+  .our-team .member .social a {
+    color: #a2a2a2;
+    transition: 0.3s;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #bbbbbb;
+  }
+  
+  .our-team .member .social a:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+  
+  .our-team .member .social i {
+    font-size: 18px;
+    margin: 0 2px;
+  }
+/* ==================================== */  

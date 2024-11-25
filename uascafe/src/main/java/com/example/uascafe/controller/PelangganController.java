@@ -3,9 +3,13 @@ package com.example.uascafe.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.example.uascafe.entity.Pelanggan;
 import com.example.uascafe.service.PelangganService;
+
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -35,17 +39,16 @@ public class PelangganController {
             HttpSession session,
             Model model) {
 
-        // Hash password using MD5
-        String hashedPassword = pelangganService.hashPassword(password);
-
         Pelanggan pelanggan = pelangganService.findByEmail(email);
-        // Validasi login dengan MD5 password comparison
-        if (pelanggan != null && pelanggan.getPassword().equals(hashedPassword)) {
+
+        if (pelanggan != null && pelangganService.validatePassword(password, pelanggan.getPassword())) {
             // Simpan data login ke session
             session.setAttribute("pelangganId", pelanggan.getId());
             session.setAttribute("pelangganNama", pelanggan.getNama());
+            session.setAttribute("loggedInUserEmail", pelanggan.getEmail()); // Menyimpan email ke session
             return "redirect:/Da'cof"; // Redirect ke halaman dashboard
         }
+
         model.addAttribute("error", "Email atau password salah!");
         return "login-pelanggan.html";
     }
@@ -53,11 +56,13 @@ public class PelangganController {
     @GetMapping("/Da'cof")
     public String pelangganDashboard(HttpSession session, Model model) {
         // Periksa apakah pelanggan sudah login
-        String pelangganNama = (String) session.getAttribute("pelangganNama");
+        String pelangganId = (String) session.getAttribute("pelangganId");
 
-        if (pelangganNama == null) {
+        if (pelangganId == null) {
             return "redirect:/pelanggan/login"; // Redirect ke login jika belum login
         }
+
+        String pelangganNama = (String) session.getAttribute("pelangganNama");
         model.addAttribute("nama", pelangganNama); // Tampilkan nama di dashboard
         return "index.html"; // Template dashboard
     }
