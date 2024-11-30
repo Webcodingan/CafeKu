@@ -1,13 +1,23 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-    <title>Detail Menu</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Item Details</title>
+    <link rel="stylesheet" th:href="@{/css/menudetail.css}">
 </head>
 <body>
-    <h1 th:text="'Detail Menu: ' + ${menu.namaMenu}"></h1>
-    <p><strong>Tipe:</strong> <span th:text="${menu.tipe}"></span></p>
-    <p><strong>Kategori:</strong> <span th:text="${menu.kategori}"></span></p>
-    <p><strong>Harga:</strong> Rp<span th:text="${menu.harga}"></span></p>
-    <a th:href="@{/allmenu}">Kembali ke Menu</a>
+    <div class="container">
+        <h1>Menu Item Details</h1>
+        <div class="menu-item">
+            <img th:src="@{/img/cold-brew.jpg}" alt="Menu Item Image" />
+            <div class="menu-details">
+                <h2 th:text="${menu.namaMenu}"></h2>
+                <p class="price" th:text="${menu.harga}"></p>
+                <p class="description"><span th:text="${menu.tipe}"></span> / <span th:text="${menu.kategori}"></span></p>
+            </div>
+        </div>
+        <a th:href="@{/allmenu}" class="back-button">Back to Menu</a>
+    </div>
 </body>
 </html>

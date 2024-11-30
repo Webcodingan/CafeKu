@@ -1,0 +1,57 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 100px;
+}
+h1 {
+    text-align: center;
+    color: #333;
+}
+.menu-item {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+.menu-item img {
+    max-width: 200px;
+    margin-right: 20px;
+    border-radius: 5px;
+}
+.menu-details {
+    max-width: 600px;
+}
+.price {
+    font-size: 24px;
+    color: #e67e22;
+}
+.description {
+    margin: 10px 0;
+    color: #555;
+}
+.ingredients {
+    font-style: italic;
+    color: #777;
+}
+.back-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    background: #3498db;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.back-button:hover {
+    background: #2980b9;
+}

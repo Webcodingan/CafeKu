@@ -40,7 +40,7 @@
                                 th:each="menu : ${menuList}">
                                 <div class="menu-item">
                                     <div class="position-relative bg-light overflow-hidden">
-                                        <img class="img-fluid w-100" th:src="@{/img/img2.jpg}" alt="Menu image">
+                                        <img class="img-fluid w-100" th:src="@{/img/cold-brew.jpg}" alt="Menu image">
                                         <div
                                             class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
                                             New</div>
@@ -48,7 +48,7 @@
                                     <div class="text-center p-4">
                                         <a class="d-block h5 mb-2" th:href="@{'/menu/detail/' + ${menu.idMenu}}"
                                             th:text="${menu.namaMenu}"></a>
-                                        <span class="text-primary me-1" th:text="${menu.tipe}"></span>
+                                        <span class="text-primary me-1" th:text="${menu.tipe}"></span> /
                                         <span class="text-primary me-1" th:text="${menu.kategori}"></span>
                                         <span class="text-body text-decoration-line-through"
                                             th:text="${menu.harga}"></span>
@@ -81,10 +81,7 @@
         </div>
     </footer>
 
-    <script th:src="@{js/jquery.min.js}"></script>
-    <script th:src="@{js/popper.js}"></script>
-    <script th:src="@{js/bootstrap.min.js}"></script>
-    <script th:src="@{js/main.js}"></script>
+    
 </body>
 
 </html>

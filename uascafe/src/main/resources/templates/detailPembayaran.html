@@ -1,25 +1,101 @@
+<!-- 
+ Template from :  
+ https://www.bootdey.com/snippets/view/simple-invoice-receipt-email-template
+ -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Detail Pembayaran</title>
-    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- CSS -->
+	<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}">
+	<link th:href="@{https://fonts.googleapis.com/css?family=Montserrat}" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/receipt.css}">
+
+    <!-- Font Awesome -->
+    <script th:src="@{https://kit.fontawesome.com/b5404b0a68.js}" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Detail Pembayaran</h1>
-
-        <div class="detail-section">
-            <p><strong>Nama Customer:</strong> <span th:text="${customerName}"></span></p>
-            <p><strong>Menu yang Dipesan:</strong> <span th:text="${menuName}"></span></p>
-            <p><strong>Catatan:</strong> <span th:text="${note}"></span></p>
-            <p><strong>Kuantitas:</strong> <span th:text="${quantity}"></span></p>
-            <p><strong>Total Harga:</strong> Rp. <span th:text="${price}"></span></p>
-            <p><strong>Rating:</strong><span th:text="${rating}"></span></p>
-        </div>
-
-        <div class="actions">
-            <a href="/allmenu" class="btn">Kembali ke Menu</a>
-        </div>
-    </div>
+    <table class="body-wrap">
+        <tbody><tr>
+            <td></td>
+            <td class="container" width="600">
+                <div class="content">
+                    <table class="main" width="100%" cellpadding="0" cellspacing="0">
+                        <tbody><tr>
+                            <td class="content-wrap aligncenter">
+                                <table width="100%" cellpadding="0" cellspacing="0">
+                                    <tbody><tr>
+                                        <td class="content-block">
+                                            <h2>Detail Pembayaran</h2>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="content-block">
+                                            <table class="invoice">
+                                                <tbody><tr>
+                                                    <td>
+                                                        <p><strong>Nama Customer:</strong>
+                                                            <span th:text="${customerName}"></span>
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <table class="invoice-items" cellpadding="0" cellspacing="0">
+                                                            <tbody>
+                                                            <!-- Detail Pembelian Customer -->
+                                                            <tr>
+                                                                <td>
+                                                                    <strong><span th:text="${menuName}"></span></strong>
+                                                                    <br>
+                                                                    <span th:text="${note}"></span>
+                                                                </td>
+                                                                <td class="alignright"><strong><span th:text="${quantity}"></span></strong></td>
+                                                            </tr>
+                                                            <!-- Total -->
+                                                            <tr class="total">
+                                                                <td class="alignright" width="80%">Total</td>
+                                                                <td class="alignright">
+                                                                    Rp. <span th:text="${price}"></span>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody></table>
+                                                    </td>
+                                                </tr>
+                                            </tbody></table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p><strong>Rating: </strong><span th:text="${rating}"></span></p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="content-block">
+                                            <a th:href="@{/allmenu}">Kembali ke menu</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="content-block">
+                                            DaCof - Kelompok 1 SI A '23
+                                        </td>
+                                    </tr>
+                                </tbody></table>
+                            </td>
+                        </tr>
+                    </tbody></table>
+                    <div class="footer">
+                        <table width="100%">
+                            <tbody><tr>
+                                <td class="aligncenter content-block">Questions? Email <a href="mailto:">kelompok1@dacof.comdacof</a></td>
+                            </tr>
+                        </tbody></table>
+                    </div></div>
+            </td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
 </body>
 </html>
