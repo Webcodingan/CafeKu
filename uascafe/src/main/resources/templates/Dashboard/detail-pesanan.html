@@ -72,6 +72,12 @@
                 <td th:text="${pesanan.pembayaran != null ? pesanan.pembayaran.pajak : 'N/A'}"></td>
                 <td>
             </tr>
+             <tr>
+                <th>Rating:</th>
+                <td th:text="${pesanan.pelanggan != null ? pesanan.pelanggan.rating : 'N/A'}"></td>
+                <td>
+            </tr>
+            
         </table>
 
         <a href="/pesanan" class="btn btn-primary mt-3">Kembali ke Daftar Pesanan</a>

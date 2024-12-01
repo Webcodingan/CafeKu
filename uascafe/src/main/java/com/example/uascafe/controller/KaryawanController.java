@@ -54,7 +54,7 @@ public class KaryawanController {
 
             return "redirect:/karyawan-dashboard"; // Redirect ke halaman dashboard
         }
-        model.addAttribute("error", "Email atau password salah!");
+        model.addAttribute("error", "Email atau password salah, Silahkan coba kembali!");
         return "login-karyawan.html";
     }
 

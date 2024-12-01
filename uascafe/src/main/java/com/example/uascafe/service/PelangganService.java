@@ -60,6 +60,14 @@ public class PelangganService {
         return pelangganRepository.findById(id);
     }
 
+    public void hapusPelanggan(String id) {
+        if (pelangganRepository.existsById(id)) {
+            pelangganRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Pelanggan dengan ID " + id + " tidak ditemukan.");
+        }
+    }
+
     // Method to save Pelanggan
     public void savePelanggan(Pelanggan pelanggan) {
         if (pelangganRepository.existsById(pelanggan.getId())) {

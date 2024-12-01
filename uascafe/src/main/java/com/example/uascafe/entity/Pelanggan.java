@@ -33,6 +33,6 @@ public class Pelanggan extends User {
     
     @Override
     public String notifikasiLogin() {
-        return "Karyawan " + getNama() + " telah berhasil login.";
+        return "Pelanggan " + getNama() + " telah berhasil login.";
     }
 }

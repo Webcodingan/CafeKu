@@ -29,10 +29,38 @@
             <a th:href="@{/pembayaran}"><span class="fa fa-suitcase mr-3"></span> Pembayaran</a>
           </li>
           <li>
-            <form method="post" action="/karyawan/logout" style="display: inline;">
-              <button class="nav-link btn btn-link" type="submit"><span class="fa-solid fa-right-from-bracket mr-3"></span> Logout</button>
-            </form>
+            <a th:href="@{/rating}"><span class="fa fa-suitcase mr-3"></span> Rating</a>
           </li>
+
+          <!-- Tombol Logout -->
+          <li>
+            <button class="nav-link btn btn-link" type="button" data-bs-toggle="modal" data-bs-target="#logoutModal">
+              <span class="fa-solid fa-right-from-bracket mr-3"></span> Logout
+            </button>
+
+          <!-- Modal Konfirmasi Logout -->
+          <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title fs-5 text-dark" id="logoutModalLabel">Konfirmasi Logout</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                  </button>
+                </div>
+                <div class="modal-body text-dark">
+                  <p>Apakah Anda yakin untuk logout?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                  <form method="post" action="/karyawan/logout" style="display: inline;">
+                    <button type="submit" class="btn btn-danger">Logout</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </ul>
       </div>
     </nav>

@@ -33,7 +33,8 @@
                     <!-- Logout button -->
                     <li class="nav-item" th:if="${nama != null}">
                         <form th:action="@{/pelanggan/logout}" method="post" style="display:inline;">
-                            <button type="submit" class="nav-link btn btn-link me-5">Logout</button>
+                            <button type="submit" class="nav-link btn btn-link me-5"
+                                onclick="return confirm('Apakah Anda yakin ingin Logout?')">Logout</button>
                         </form>
                     </li>
 

@@ -25,6 +25,11 @@
     <div class="container">
         <h1>Menu Form</h1>
 
+        <!-- Menampilkan pesan error jika ada -->
+        <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+            <span th:text="${errorMessage}"></span>
+        </div>
+
         <form th:action="@{/menu/save}" th:object="${menu}" method="post">
             <input type="hidden" th:field="*{idMenu}">
 

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 // import java.security.Principal;
 import java.util.List;
@@ -76,6 +77,7 @@ public class HomeController {
     public String createPesananForm(Model model, HttpSession session) {
         // Cek apakah pelanggan sudah login dengan memeriksa session
         if (session.getAttribute("pelangganId") == null) {
+            model.addAttribute("errorMessage", "Silakan login terlebih dahulu.");
             return "redirect:/pelanggan/login"; // Redirect ke login jika tidak login
         }
 
@@ -91,6 +93,7 @@ public class HomeController {
 
         if (loggedInPelanggan == null) {
             // Jika pelanggan tidak ditemukan, redirect ke login
+            model.addAttribute("errorMessage", "Akun pelanggan tidak ditemukan. Silakan login.");
             return "redirect:/pelanggan/login";
         }
 
@@ -111,20 +114,30 @@ public class HomeController {
             @ModelAttribute Pesanan pesanan,
             @RequestParam("menuId") int menuId,
             @RequestParam("pembayaranId") int pembayaranId,
-            @RequestParam("userId") String userId, // Pastikan ini sesuai dengan form
-            Model model) {
+            @RequestParam("userId") String userId,
+            @RequestParam("rating") int rating, // Tambahkan rating
+            Model model, RedirectAttributes redirectAttributes) {
 
-        // Cari pelanggan berdasarkan userId
-        Optional<Pelanggan> pelanggan = pelangganService.findById(userId);
-
-        if (pelanggan.isPresent()) {
-            pesanan.setPelanggan(pelanggan.get()); // Tetapkan pelanggan ke pesanan
-        } else {
-            model.addAttribute("errorMessage", "Pelanggan tidak ditemukan");
-            return "createPesanan"; // Kembali ke form jika pelanggan tidak ditemukan
+        // Validasi apakah semua input sudah diisi
+        if (menuId <= 0 || pembayaranId <= 0 || userId == null || userId.isEmpty() || rating <= 0) {
+            model.addAttribute("errorMessage", "Harus mengisi semua field termasuk rating.");
+            model.addAttribute("menuList", menuService.getAllMenu());
+            model.addAttribute("pembayaranList", pembayaranService.getAllPembayaran());
+            return "createPesanan";
         }
 
-        // Mendapatkan Menu dan Pembayaran berdasarkan ID
+        // Tetapkan rating pada pelanggan
+        Optional<Pelanggan> pelanggan = pelangganService.findById(userId);
+        if (pelanggan.isPresent()) {
+            Pelanggan pelangganEntity = pelanggan.get();
+            pelangganEntity.setRating(String.valueOf(rating)); // Simpan rating sebagai String
+            pesanan.setPelanggan(pelangganEntity);
+        } else {
+            model.addAttribute("errorMessage", "Pelanggan tidak ditemukan");
+            return "createPesanan";
+        }
+
+        // Lanjutkan proses menyimpan pesanan...
         Optional<Menu> menu = menuService.getMenuById(menuId);
         Optional<Pembayaran> pembayaran = pembayaranService.getPembayaranById(pembayaranId);
 
@@ -132,13 +145,11 @@ public class HomeController {
             pesanan.setMenu(menu.get());
             pesanan.setPembayaran(pembayaran.get());
             pesanan.setTanggal(LocalDateTime.now());
-            pesanan = pesananService.createPesanan(pesanan); // Simpan pesanan ke database
-
-            // Redirect ke halaman detailPembayaran dengan ID pesanan
-            return "redirect:/detailPembayaran?idPesanan=" + pesanan.getIdOrder(); // Sertakan idPesanan
+            pesanan = pesananService.createPesanan(pesanan);
+            redirectAttributes.addFlashAttribute("successMessage", "Pesanan berhasil disimpan.");
+            return "redirect:/detailPembayaran?idPesanan=" + pesanan.getIdOrder();
         }
 
-        // Jika menu atau pembayaran tidak ditemukan, kembalikan error
         model.addAttribute("errorMessage", "Menu atau Pembayaran tidak ditemukan");
         model.addAttribute("menuList", menuService.getAllMenu());
         model.addAttribute("pembayaranList", pembayaranService.getAllPembayaran());

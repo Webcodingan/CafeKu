@@ -32,6 +32,7 @@
             <thead>
                 <tr class="text-center">
                     <th>ID</th>
+                    <th>Nama Customer</th>
                     <th>Nama Menu</th>
                     <th>Harga</th>
                     <th>Pajak</th>
@@ -42,6 +43,7 @@
             <tbody class="table-group-divider text-center">
                 <tr th:each="pesanan : ${pesananList}">
                     <td th:text="${pesanan.idOrder}"></td>
+                    <td th:text="${pesanan.pelanggan != null ? pesanan.pelanggan.nama : 'N/A'}"></td>
                     <td th:text="${pesanan.menu != null ? pesanan.menu.namaMenu : 'N/A'}"></td>
                     <td th:text="${pesanan.menu != null ? pesanan.menu.harga : 'N/A'}"></td>
                     <td th:text="${pesanan.pembayaran != null ? pesanan.pembayaran.pajak : 'N/A'}"></td>

@@ -4,12 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.uascafe.entity.Pelanggan;
 import com.example.uascafe.service.PelangganService;
-
+import java.util.List;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -68,6 +69,7 @@ public class PelangganController {
 
         String pelangganNama = (String) session.getAttribute("pelangganNama");
         model.addAttribute("nama", pelangganNama); // Tampilkan nama di dashboard
+        model.addAttribute("success", "Anda berhasil login!");
         return "index.html"; // Template dashboard
     }
 
@@ -76,6 +78,30 @@ public class PelangganController {
     public String logout(HttpSession session) {
         session.invalidate(); // Hapus semua data di session
         return "index.html"; // Redirect ke halaman login
+    }
+
+    // Menampilkan semua rating pelanggan
+    @GetMapping("/rating")
+    public String listRating(Model model) {
+        List<Pelanggan> pelangganList = pelangganService.getAllPelanggan();
+        model.addAttribute("pelangganList", pelangganList);
+        return "Dashboard/rating"; // Mengarah ke template Dashboard/rating.html
+    }
+
+    // Menampilkan detail rating berdasarkan ID pelanggan
+    @GetMapping("/rating/{id}")
+    public String detailRating(@PathVariable("id") String id, Model model) {
+        Pelanggan pelanggan = pelangganService.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pelanggan dengan ID " + id + " tidak ditemukan."));
+
+        model.addAttribute("pelanggan", pelanggan);
+        return "Dashboard/detailRating"; // Mengarah ke template Dashboard/detailRating.html
+    }
+    
+    @PostMapping("/rating/hapus/{id}")
+    public String hapusRating(@PathVariable("id") String id) {
+        pelangganService.hapusPelanggan(id);
+        return "redirect:/rating"; // Redirect ke halaman daftar rating setelah menghapus
     }
 
     // Route untuk menampilkan form register pelanggan
@@ -102,7 +128,7 @@ public class PelangganController {
 
         // Validasi apakah email sudah digunakan
         if (pelangganService.findByEmail(email) != null) {
-            model.addAttribute("error", "Email sudah digunakan!");
+            model.addAttribute("error", "Email sudah digunakan! Silahkan isi dengan alamat email lain.");
             return "register-pelanggan.html";
         }
 

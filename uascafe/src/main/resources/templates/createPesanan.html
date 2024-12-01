@@ -22,9 +22,9 @@
     </script>
 
     <!-- CSS -->
-	<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}">
-	<link th:href="@{https://fonts.googleapis.com/css?family=Montserrat}" rel="stylesheet">
-	<link rel="stylesheet" th:href="@{/css/cart.css}">
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}">
+    <link th:href="@{https://fonts.googleapis.com/css?family=Montserrat}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/cart.css}">
 
     <!-- Font Awesome -->
     <script th:src="@{https://kit.fontawesome.com/b5404b0a68.js}" crossorigin="anonymous"></script>
@@ -34,122 +34,153 @@
     <main class="page">
         <section class="shopping-cart dark">
             <div class="container">
-               <div class="block-heading">
-                   <h2><i class="fa-solid fa-mug-hot fa-2x" style="color: #3C2F2F;"></i> <b>DaCof</b></h2>
-               </div>
-               <div class="content">
+                <div class="block-heading">
+                    <h2><i class="fa-solid fa-mug-hot fa-2x" style="color: #3C2F2F;"></i> <b>DaCof</b></h2>
+                </div>
+                <div class="content">
                     <div class="row">
                         <div class="col-md-12 col-lg-8">
                             <div class="items">
                                 <div class="container">
                                     <div class="product">
                                         <h1>Pesanan</h1>
-                                        
-                                            <form th:action="@{/pesanan/save}" th:object="${pesanan}" method="post">
-                                                <!-- User yang sedang login -->
-                                                <div class="mb-3">
-                                                    <label for="user" class="form-label">User</label>
-                                                    <input type="text" id="user" name="userDisplay" class="form-control"
-                                                        th:value="${loggedInPelanggan.nama}" readonly />
-                                                    <input type="hidden" name="userId" th:value="${loggedInPelanggan.id}" />
-                                                </div>
-
-
-                                                <!-- Dropdown untuk memilih menu -->
-                                                <div class="mb-3">
-                                                    <label for="menuId" class="form-label">Pilih Menu</label>
-                                                    <select id="menuId" name="menuId" class="form-select" required onchange="calculateTotal()">
-                                                        <option value="" disabled selected>Pilih menu</option>
-                                                        <option th:each="menu : ${menuList}" th:value="${menu.idMenu}" th:data-harga="${menu.harga}"
-                                                            th:text="'[' + ${menu.idMenu} + '] ' + ${menu.namaMenu}"></option>
-                                                    </select>
-                                                </div>
-
-                                                <!-- Harga -->
-                                                <div class="mb-3">
-                                                    <label for="harga" class="form-label">Harga</label>
-                                                    <input type="number" id="harga" name="harga" class="form-control" readonly />
-                                                </div>
-
-                                                <!-- Kuantitas -->
-                                                <div class="mb-3">
-                                                    <label for="kuantitas" class="form-label">Kuantitas</label>
-                                                    <input type="number" id="kuantitas" name="kuantitas" class="form-control" min="1" value="1"
-                                                        onchange="calculateTotal()" required />
-                                                </div>
-
-                                                <!-- Catatan -->
-                                                <div class="mb-3">
-                                                    <label for="note" class="form-label">Catatan</label>
-                                                    <textarea id="note" name="note" class="form-control"
-                                                        placeholder="Masukkan catatan (opsional)"></textarea>
-                                                </div>
+                                        <!-- Menampilkan pesan error jika ada -->
+                                        <div th:if="${errorMessage}" class="alert alert-danger">
+                                            <p th:text="${errorMessage}"></p>
                                         </div>
+
+                                        <!-- Menampilkan pesan success jika ada -->
+                                        <div th:if="${successMessage}" class="alert alert-success">
+                                            <p th:text="${successMessage}"></p>
+                                        </div>
+
+                                        <form th:action="@{/pesanan/save}" th:object="${pesanan}" method="post">
+                                            <!-- User yang sedang login -->
+                                            <div class="mb-3">
+                                                <label for="user" class="form-label">User</label>
+                                                <input type="text" id="user" name="userDisplay" class="form-control"
+                                                    th:value="${loggedInPelanggan.nama}" readonly />
+                                                <input type="hidden" name="userId" th:value="${loggedInPelanggan.id}" />
+                                            </div>
+
+
+                                            <!-- Dropdown untuk memilih menu -->
+                                            <div class="mb-3">
+                                                <label for="menuId" class="form-label">Pilih Menu</label>
+                                                <select id="menuId" name="menuId" class="form-select" required
+                                                    onchange="calculateTotal()">
+                                                    <option value="" disabled selected>Pilih menu</option>
+                                                    <option th:each="menu : ${menuList}" th:value="${menu.idMenu}"
+                                                        th:data-harga="${menu.harga}"
+                                                        th:text="'[' + ${menu.idMenu} + '] ' + ${menu.namaMenu}">
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            <!-- Harga -->
+                                            <div class="mb-3">
+                                                <label for="harga" class="form-label">Harga</label>
+                                                <input type="number" id="harga" name="harga" class="form-control"
+                                                    readonly />
+                                            </div>
+
+                                            <!-- Kuantitas -->
+                                            <div class="mb-3">
+                                                <label for="kuantitas" class="form-label">Kuantitas</label>
+                                                <input type="number" id="kuantitas" name="kuantitas"
+                                                    class="form-control" min="1" value="1" onchange="calculateTotal()"
+                                                    required />
+                                            </div>
+
+                                            <!-- Catatan -->
+                                            <div class="mb-3">
+                                                <label for="note" class="form-label">Catatan</label>
+                                                <textarea id="note" name="note" class="form-control"
+                                                    placeholder="Masukkan catatan (opsional)"></textarea>
+                                            </div>
+
+                                            <!-- Rating -->
+                                            <div class="mb-3">
+                                                <label for="rating" class="form-label">Rating</label>
+                                                <select id="rating" name="rating" class="form-select" required>
+                                                    <option value="" disabled selected>Pilih rating</option>
+                                                    <option value="1">1 - Sangat Buruk</option>
+                                                    <option value="2">2 - Buruk</option>
+                                                    <option value="3">3 - Cukup</option>
+                                                    <option value="4">4 - Baik</option>
+                                                    <option value="5">5 - Sangat Baik</option>
+                                                </select>
+                                            </div>
+
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12 col-lg-4">
-                                <div class="summary">
-                                    <h3>Summary</h3>
+                        </div>
+                        <div class="col-md-12 col-lg-4">
+                            <div class="summary">
+                                <h3>Summary</h3>
 
-                                    <!-- subtotal -->
-                                    <div class="summary-item"><span class="text">Subtotal</span>
-                                        <span class="price">
-                                            <input type="number" id="totalHasil" name="totalHasil" class="form-control" readonly />
-                                        </span>
-                                    </div>
+                                <!-- subtotal -->
+                                <div class="summary-item"><span class="text">Subtotal</span>
+                                    <span class="price">
+                                        <input type="number" id="totalHasil" name="totalHasil" class="form-control"
+                                            readonly />
+                                    </span>
+                                </div>
 
-                                    <!-- Pajak -->
-                                    <div class="summary-item"><span class="text">Pajak</span><span class="price">11%</span>
-                                        <input type="hidden" id="pajak" value="0.11" />
-                                    </div>
+                                <!-- Pajak -->
+                                <div class="summary-item"><span class="text">Pajak</span><span class="price">11%</span>
+                                    <input type="hidden" id="pajak" value="0.11" />
+                                </div>
 
-                                    <!-- Charge -->
-                                    <div class="summary-item"><span class="text">Charge</span>
-                                        <span class="price">
-                                            <input type="number" id="charge" name="charge" class="form-control" readonly />
-                                        </span>
-                                    </div>
-                                    
-                                    <!-- Total -->
-                                    <div class="summary-item"><span class="text">Total</span>
-                                        <span class="price">
-                                            <input type="number" id="totalFinal" name="totalFinal" class="form-control" readonly />
-                                        </span>
-                                    </div>
-                                    
-                                    <br>
+                                <!-- Charge -->
+                                <div class="summary-item"><span class="text">Charge</span>
+                                    <span class="price">
+                                        <input type="number" id="charge" name="charge" class="form-control" readonly />
+                                    </span>
+                                </div>
 
-                                    <!-- Metode Pembayaran -->
-                                    <div class="summary-item"><span class="text">Metode Pembayaran</span>
-                                        <select id="pembayaranId" name="pembayaranId" class="form-select" required>
-                                            <option value="" disabled selected>Pilih metode pembayaran</option>
-                                            <option th:each="pembayaran : ${pembayaranList}" th:value="${pembayaran.idPembayaran}"
-                                                th:text="${pembayaran.metodePembayaran}"></option>
-                                        </select>
+                                <!-- Total -->
+                                <div class="summary-item"><span class="text">Total</span>
+                                    <span class="price">
+                                        <input type="number" id="totalFinal" name="totalFinal" class="form-control"
+                                            readonly />
+                                    </span>
+                                </div>
+
+                                <br>
+
+                                <!-- Metode Pembayaran -->
+                                <div class="summary-item"><span class="text">Metode Pembayaran</span>
+                                    <select id="pembayaranId" name="pembayaranId" class="form-select" required>
+                                        <option value="" disabled selected>Pilih metode pembayaran</option>
+                                        <option th:each="pembayaran : ${pembayaranList}"
+                                            th:value="${pembayaran.idPembayaran}"
+                                            th:text="${pembayaran.metodePembayaran}"></option>
+                                    </select>
                                 </div>
                                 <button type="submit" class="btn btn-danger btn-lg btn-block">Checkout</button>
                                 <a th:href="@{/allmenu}" class="btn btn-warning btn-lg btn-block">Kembali</a>
-                                </div>
                             </div>
+                        </div>
                         </form>
-                    </div> 
+                    </div>
                 </div>
             </div>
-       </section>
-   </main>
+        </section>
+    </main>
 
-   <script>
-    document.getElementById("menuId").addEventListener("change", function () {
-        const selectedOption = this.options[this.selectedIndex];
-        const harga = selectedOption.getAttribute("data-harga");
-        document.getElementById("harga").value = harga || 0;
-        calculateTotal();
-    });
+    <script>
+        document.getElementById("menuId").addEventListener("change", function () {
+            const selectedOption = this.options[this.selectedIndex];
+            const harga = selectedOption.getAttribute("data-harga");
+            document.getElementById("harga").value = harga || 0;
+            calculateTotal();
+        });
     </script>
 
-   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 
 </html>

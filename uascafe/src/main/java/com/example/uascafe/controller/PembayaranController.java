@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.uascafe.entity.Pembayaran;
 import com.example.uascafe.service.PembayaranService;
@@ -33,9 +34,21 @@ public class PembayaranController {
 
     // Menangani proses pembuatan pembayaran baru
     @PostMapping("/pembayaran/create")
-    public String createPembayaran(@ModelAttribute Pembayaran pembayaran) {
+    public String createPembayaran(@ModelAttribute Pembayaran pembayaran, Model model,
+            RedirectAttributes redirectAttributes) {
+        // Validasi jika ada input yang kosong
+        if (pembayaran.getMetodePembayaran() == null || pembayaran.getMetodePembayaran().isEmpty() ||
+                pembayaran.getMetodePembayaran() == null || pembayaran.getMetodePembayaran().isEmpty()) {
+
+            model.addAttribute("errorMessage", "Semua field wajib diisi.");
+            return "Dashboard/createPembayaran"; // Kembali ke form jika ada input yang kosong
+        }
+
         pembayaranService.savePembayaran(pembayaran); // Pajak otomatis diset di service
-        return "redirect:/pembayaran"; // Kembali ke daftar pembayaran
+
+        // Menambahkan successMessage untuk ditampilkan setelah redirect
+        redirectAttributes.addFlashAttribute("successMessage", "Pembayaran berhasil dibuat!");
+        return "redirect:/pembayaran"; // Redirect ke daftar pembayaran setelah sukses
     }
 
     // Menampilkan detail pembayaran berdasarkan ID
